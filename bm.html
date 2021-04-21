@@ -25,14 +25,15 @@
         .left {
   left: 0;
   padding-top: 10%;
-  padding-left: 70px;
+  
   background-color: pink;
+  text-align: center;
 }
 .right{
     right: 0;
     padding-top: 10%;
-    padding-left: 50px;
     background-color: beige;
+    text-align: center;
 }
     </style>
   </head>
@@ -41,33 +42,119 @@
     <script type="text/babel">
 
       class Hello1 extends React.Component {
+        constructor(props){
+          super(props)
+          this.state={
+            firstnumber:0,
+            secondnumber:0,
+            num3:0,
+            score:0
+          }
+        }
         render() {
           return (
             <div class="center">
                 <div class="split left">
                     <h1>BMI CALCULATOR</h1>
                     <div class="centered"></div>
-                    <label>Weight: <input id="first" type="text/babel"/></label> <br/><br/>
-                    <label>Height: <input id="second" type="text/babel"/> </label> <br/><br/>
-                    <button class='button'>Submit</button>
+                    <label>Weight(kg): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="first" type="text/babel" onChange={this.updateResponse1} value={this.state.firstnumber}/></label> <br/><br/>
+                    <label>Height(ft): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="second" type="text/babel" onChange={this.updateResponse2} value={this.state.secondnumber}/> </label> <br/><br/>
+                    <label>Height(inches): <input id="second" type="text/babel" onChange={this.updateResponse3} value={this.state.num3}/> </label> <br/><br/>
+                    <button class='button' onClick={()=>this.multiply()}>Submit</button>
+                    <output> Result: <b></b></output>
+                    <div id='mySum'>
+                  {this.state.score}
+                  
+                  </div> 
                 </div>
 
                 <div class="split right">
                     <h1>NORMAL CALCULATOR</h1>
                     <div class="centered"></div>
-                    <label>First Number: <input id="third" type="text/babel"/></label> <br/><br/>
-                    <label>Second Number: <input id="four" type="text/babel"/> </label> <br/><br/>
-                    <label>Select option: </label>
-                    <button class='button'>+</button>&nbsp;&nbsp;
-                    <button class='button'>-</button>&nbsp;&nbsp;
-                    <button class='button'>*</button>&nbsp;&nbsp;
-                    <button class='button'>/</button>
+                    <label>First Number: &nbsp;&nbsp;&nbsp;&nbsp;<input id="four" type="text/babel" onChange={this.updateResponse1} value={this.state.firstnumber}/></label> <br/><br/>
+                    <label>Second Number: <input id="five" type="text/babel" onChange={this.updateResponse2} value={this.state.secondnumber}/> </label> <br/><br/>
+                    <label>Select option: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <button class='button' onClick={()=>this.add()}>+</button>&nbsp;&nbsp;
+                    <button class='button' onClick={()=>this.sub()}>-</button>&nbsp;&nbsp;
+                    <button class='button' onClick={()=>this.mul()}>*</button>&nbsp;&nbsp;
+                    <button class='button' onClick={()=>this.div()}>/</button><br/><br/>
+                    <output> Result: <b>{this.state.score} </b></output>
 
                 </div>
             </div> 
 
           );
             }
+            updateResponse1=(event)=>{
+          this.setState({
+            firstnumber: event.target.value
+          })
+        }
+
+        updateResponse2=(event)=>{
+          this.setState({
+            secondnumber:event.target.value
+          })
+        }
+
+        updateResponse3=(event)=>{
+          this.setState({
+            num3:event.target.value
+          })
+        }
+
+
+        add(){
+          const a=parseInt(this.state.firstnumber)       
+          const b=parseInt(this.state.secondnumber)
+          const c = a + b
+          this.setState({
+            score:c
+          })
+
+        }
+        sub(){
+          var a=this.state.firstnumber
+          var b=this.state.secondnumber
+          var c= a - b
+          this.setState({
+            score:c
+          })
+
+        }
+
+        mul(){
+          var a=this.state.firstnumber
+          var b=this.state.secondnumber
+          var c= a * b
+          this.setState({
+            score:c
+          })
+
+        }
+
+        div(){
+          var a=this.state.firstnumber
+          var b=this.state.secondnumber
+          var c= a / b
+          this.setState({
+            score:c
+          })
+
+        }
+        multiply(){
+          var a= this.state.num1;
+          var b= this.state.num2 * 0.3048;
+          var c= this.state.num3 * 0.0254;
+          var e= b + c;
+          
+          
+          var k = a / (e*e);
+          this.setState({
+            score:k
+          })
+          
+        }
         }
         ReactDOM.render(<Hello1 />, document.querySelector("#app"));      
 </script>

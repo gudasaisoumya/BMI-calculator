@@ -1,0 +1,123 @@
+  
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Hello</title>
+    <style>
+    .center {
+            margin: auto;
+            margin-top: 15%;
+            width: 50%;
+            border: 5px solid rgb(2, 2, 2);
+            padding: 10px;
+            text-align: center;
+            
+
+    }
+    h1{
+        color: blue;
+    }
+    output{
+        font-size: larger;
+        font-weight: bold;
+    }
+    body{
+        background-color: aquamarine;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="app" />
+    <script type="text/babel">
+
+      class Hello1 extends React.Component {
+
+        constructor(props){
+          super(props)
+          this.state={
+            firstnumber:0,
+            secondnumber:0,
+            score:0
+          }
+        }
+        render() {
+          return (
+            <div class='center'>
+                <h1 >CALCULATOR</h1>
+                <label>Enter First Number: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type='text/babel' id='first' onChange={this.updateResponse1} value={this.state.firstnumber} /><br /><br />
+                <label> Enter Second Number: &nbsp;</label>
+                <input type='text/babel' id='second' onChange={this.updateResponse2} value={this.state.secondnumber} /> <br/> <br/>
+                <button class='button' onClick={()=>this.add()}>ADD</button>  &nbsp;
+                <button class='button' onClick={()=>this.sub()}>SUB</button>  &nbsp;
+                <button class='button' onClick={()=>this.mul()}>MUL</button>  &nbsp;
+                <button class='button' onClick={()=>this.div()}>DIV</button>  &nbsp; <br/> <br/>
+                <output> Result: {this.state.score} </output>
+            </div>
+            
+          );
+        }
+
+        updateResponse1=(event)=>{
+          this.setState({
+            firstnumber: event.target.value
+          })
+        }
+
+        updateResponse2=(event)=>{
+          this.setState({
+            secondnumber:event.target.value
+          })
+        }
+
+
+        add(){
+          const a=parseInt(this.state.firstnumber)       
+          const b=parseInt(this.state.secondnumber)
+          const c = a + b
+          this.setState({
+            score:c
+          })
+
+        }
+        sub(){
+          var a=this.state.firstnumber
+          var b=this.state.secondnumber
+          var c= a - b
+          this.setState({
+            score:c
+          })
+
+        }
+
+        mul(){
+          var a=this.state.firstnumber
+          var b=this.state.secondnumber
+          var c= a * b
+          this.setState({
+            score:c
+          })
+
+        }
+
+        div(){
+          var a=this.state.firstnumber
+          var b=this.state.secondnumber
+          var c= a / b
+          this.setState({
+            score:c
+          })
+
+        }
+
+        
+      }
+      ReactDOM.render(<Hello1 />, document.querySelector("#app"));
+
+
+    </script>
+  </body>
+</html>
