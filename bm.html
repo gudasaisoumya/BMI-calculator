@@ -35,6 +35,7 @@
     background-color: beige;
     text-align: center;
 }
+
     </style>
   </head>
   <body>
@@ -45,10 +46,14 @@
         constructor(props){
           super(props)
           this.state={
-            firstnumber:0,
-            secondnumber:0,
-            num3:0,
-            score:0
+            firstnumber:"",
+            secondnumber:"",
+            num3:"",
+            score:0,
+            num1:0,
+            num2:0,
+            score1:""
+
           }
         }
         render() {
@@ -60,19 +65,18 @@
                     <label>Weight(kg): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="first" type="text/babel" onChange={this.updateResponse1} value={this.state.firstnumber}/></label> <br/><br/>
                     <label>Height(ft): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="second" type="text/babel" onChange={this.updateResponse2} value={this.state.secondnumber}/> </label> <br/><br/>
                     <label>Height(inches): <input id="second" type="text/babel" onChange={this.updateResponse3} value={this.state.num3}/> </label> <br/><br/>
-                    <button class='button' onClick={()=>this.multiply()}>Submit</button>
-                    <output> Result: <b></b></output>
-                    <div id='mySum'>
-                  {this.state.score}
-                  
+                    <button class='button' onClick={()=>this.multiply()}>Submit</button><br></br><br></br>
+                    <output> Result: <b>{this.state.score1}</b></output>
+                    <div id='mySum' >
+                     
                   </div> 
                 </div>
 
                 <div class="split right">
                     <h1>NORMAL CALCULATOR</h1>
                     <div class="centered"></div>
-                    <label>First Number: &nbsp;&nbsp;&nbsp;&nbsp;<input id="four" type="text/babel" onChange={this.updateResponse1} value={this.state.firstnumber}/></label> <br/><br/>
-                    <label>Second Number: <input id="five" type="text/babel" onChange={this.updateResponse2} value={this.state.secondnumber}/> </label> <br/><br/>
+                    <label>First Number: &nbsp;&nbsp;&nbsp;&nbsp;<input id="four" type="text/babel" onChange={this.updateResponse7} value={this.state.num1}/></label> <br/><br/>
+                    <label>Second Number: <input id="five" type="text/babel" onChange={this.updateResponse8} value={this.state.num2}/> </label> <br/><br/>
                     <label>Select option: &nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <button class='button' onClick={()=>this.add()}>+</button>&nbsp;&nbsp;
                     <button class='button' onClick={()=>this.sub()}>-</button>&nbsp;&nbsp;
@@ -87,7 +91,8 @@
             }
             updateResponse1=(event)=>{
           this.setState({
-            firstnumber: event.target.value
+            firstnumber: event.target.value,
+          
           })
         }
 
@@ -102,11 +107,22 @@
             num3:event.target.value
           })
         }
-
+        updateResponse7=(event)=>{
+          this.setState({
+            num1: event.target.value,
+          
+          })
+        }
+        updateResponse8=(event)=>{
+          this.setState({
+            num2: event.target.value,
+          
+          })
+        }
 
         add(){
-          const a=parseInt(this.state.firstnumber)       
-          const b=parseInt(this.state.secondnumber)
+          const a=parseInt(this.state.num1)       
+          const b=parseInt(this.state.num2)
           const c = a + b
           this.setState({
             score:c
@@ -114,8 +130,9 @@
 
         }
         sub(){
-          var a=this.state.firstnumber
-          var b=this.state.secondnumber
+          const a=parseInt(this.state.num1)       
+          const b=parseInt(this.state.num2)
+         
           var c= a - b
           this.setState({
             score:c
@@ -124,8 +141,9 @@
         }
 
         mul(){
-          var a=this.state.firstnumber
-          var b=this.state.secondnumber
+          const a=parseInt(this.state.num1)       
+          const b=parseInt(this.state.num2)
+         
           var c= a * b
           this.setState({
             score:c
@@ -134,8 +152,9 @@
         }
 
         div(){
-          var a=this.state.firstnumber
-          var b=this.state.secondnumber
+          const a=parseInt(this.state.num1)       
+          const b=parseInt(this.state.num2)
+          
           var c= a / b
           this.setState({
             score:c
@@ -143,16 +162,29 @@
 
         }
         multiply(){
-          var a= this.state.num1;
-          var b= this.state.num2 * 0.3048;
+          var a= this.state.firstnumber;
+          var b= this.state.secondnumber * 0.3048;
           var c= this.state.num3 * 0.0254;
           var e= b + c;
+          var k = Math.round(a / (e*e));
+         /* this.setState({
+            score1:k
+          })*/
+          if(k < 18){
+            const valres=k+"  and You are underweight";
+            this.setState({score1:valres})
+          }
+          if(k>18 && k<=25){
+            const valres=k+"  and you are normal";
+            this.setState({score1:valres})
+          }
+          if(k>25){
+            const valres=k+"  and you are obesed";
+            this.setState({score1:valres})
+          }
+        
+
           
-          
-          var k = a / (e*e);
-          this.setState({
-            score:k
-          })
           
         }
         }

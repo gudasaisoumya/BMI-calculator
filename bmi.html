@@ -97,9 +97,21 @@
           
           
           var k = Math.round(a / (e*e));
-          this.setState({
+         /* this.setState({
             score:k
-          })
+          })*/
+          if(k < 18){
+            const valres=k+"You are underweight";
+            this.setState({score:k})
+          }
+          if(k>18 && k<=25){
+            const valres=k+"you are normal";
+            this.setState({score:k})
+          }
+          if(k>25){
+            const valres=k+"you are obesed"
+            this.setState({score:k})
+          }
           
         }
        
